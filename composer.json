@@ -1,0 +1,19 @@
+{
+    "name": "hissy/php-code-scanner",
+    "description": "Scan php static code to find vulnerable usage, etc.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Takuro Hishikawa"
+        }
+    ],
+    "require": {
+        "symfony/console": "^3.2",
+        "symfony/finder": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hissy\\PhpCodeScanner\\": "src"
+        }
+    }
+}

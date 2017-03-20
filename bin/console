@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$cmd = new \Hissy\PhpCodeScanner\Command\ScanCommand();
+$cmd->addAnalyser(new \Hissy\PhpCodeScanner\Analyzer\DynamicIncludeAnalyzer());
+$cmd->addAnalyser(new \Hissy\PhpCodeScanner\Analyzer\EvalAnalyzer());
+$cmd->addAnalyser(new \Hissy\PhpCodeScanner\Analyzer\FileOperationAnalyzer());
+$cmd->addAnalyser(new \Hissy\PhpCodeScanner\Analyzer\RemoteConnectAnalyzer());
+
+$wpcmd = clone $cmd;
+$wpcmd->setName('wp-code-scanner');
+$wpcmd->addAnalyser(new \Hissy\PhpCodeScanner\Analyzer\WordPressPotentialVulnerabilityAnalyzer());
+
+$app = new \Symfony\Component\Console\Application('PHP Code Scanner', '0.1');
+$app->addCommands([$cmd, $wpcmd]);
+$app->run();
